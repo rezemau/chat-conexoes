@@ -1,0 +1,61 @@
+.chat-container {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #8e44ad; /* Cor roxa para a borda */
+  padding: 10px;
+}
+
+.message {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sent {
+  background-color: #9b55b9; /* Cor roxa para mensagens enviadas */
+  color: white;
+  text-align: right;
+}
+
+.received {
+  background-color: #e5ceee; /* Cor lilás para mensagens recebidas */
+  text-align: left;
+}
+
+.input-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-input {
+  flex-grow: 1;
+  margin-bottom: 10px;
+  background-color: #ecf0f1; /* Cor lilás para o campo de visualização de mensagens */
+  color: #333; /* Cor de texto padrão */
+}
+
+.new-message-container {
+  display: flex;
+  align-items: center;
+}
+
+.new-message {
+  flex-grow: 1;
+  padding: 5px;
+  margin-right: 5px;
+  background-color: #ecf0f1; /* Cor lilás para o campo de entrada de nova mensagem */
+  color: #333; /* Cor de texto padrão */
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #8e44ad; /* Cor roxa para o botão de envio */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #663399; /* Tom mais escuro de roxo quando o botão é destacado */
+}

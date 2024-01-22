@@ -1,0 +1,18 @@
+<div class="chat-container">
+  <div *ngFor="let message of messages" [ngClass]="{'sent': message.type === 'sent', 'received': message.type === 'received'}" class="message">
+    {{ message.text }}
+  </div>
+</div>
+<div class="user-type-container">
+  <label for="client">Cliente</label>
+  <input type="radio" id="client" name="messageType" [(ngModel)]="messageType" value=c />
+
+  <label for="consultant">Consultor</label>
+  <input type="radio" id="consultant" name="messageType" [(ngModel)]="messageType" value=t />
+</div>
+<div class="input-container">
+  <div class="new-message-container">
+    <input class="new-message" [(ngModel)]="newMessage" placeholder="Digite sua mensagem..." />
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+</div>
