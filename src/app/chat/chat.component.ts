@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 
@@ -12,7 +12,7 @@ interface mensagem {
   styleUrls: ['./chat.component.scss']
 })
 
-export class ChatComponent {
+export class ChatComponent implements OnInit{
   messages: mensagem[] = [];
   newMessage: string = '';
   messageInput: string = '';
@@ -22,6 +22,9 @@ export class ChatComponent {
     private db: AngularFireDatabase
   ){
 
+  }
+  ngOnInit(): void {
+    this.updateMessageInput();
   }
   sendMessage() {
     if (this.newMessage.trim() !== '') {
@@ -40,6 +43,7 @@ export class ChatComponent {
 
   private updateMessageInput() {
     this.obterMensagensEmTempoReal('conversa_1').subscribe((res) =>{
+      console.log("TESTEEEE::::" + JSON.stringify(res));
       this.messages = res as mensagem[];
     })
     this.messageInput = this.messages.map(message => message.text).join('\n');
