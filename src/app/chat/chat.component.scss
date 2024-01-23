@@ -3,23 +3,40 @@
   overflow-y: auto;
   border: 1px solid #8e44ad; /* Cor roxa para a borda */
   padding: 10px;
+  border-radius: 5px;
 }
 
 .message {
-  margin: 5px;
+  display: block; /* Garante que cada mensagem ocupe uma linha inteira */
+  word-wrap: break-word; /* Quebra de palavra para lidar com palavras longas */
+}
+
+.sent {
+  color: white;
+  text-align: left;
+}
+
+.sent .message-content {
+  display: inline-block; /* Ajuste: para ocupar apenas o espaço do texto */
+  max-width: 50%; /* Ajuste: para limitar o texto a 50% da largura da mensagem */
+  background-color: #9b55b9; /* Cor roxa para mensagens enviadas */
+  margin: 5px 0; /* Margem superior e inferior para separar as mensagens */
   padding: 10px;
   border-radius: 5px;
 }
 
-.sent {
-  background-color: #9b55b9; /* Cor roxa para mensagens enviadas */
-  color: white;
+.received {
   text-align: right;
+  margin-left: auto; /* Move a classe received para a direita */
 }
 
-.received {
+.received .message-content {
+  display: inline-block; /* Ajuste: para ocupar apenas o espaço do texto */
+  max-width: 50%; /* Ajuste: para limitar o texto a 50% da largura da mensagem */
   background-color: #e5ceee; /* Cor lilás para mensagens recebidas */
-  text-align: left;
+  margin: 5px 0; /* Margem superior e inferior para separar as mensagens */
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .input-container {

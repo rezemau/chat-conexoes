@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 
@@ -12,15 +12,17 @@ interface mensagem {
   styleUrls: ['./chat.component.scss']
 })
 
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit {
   messages: mensagem[] = [];
   newMessage: string = '';
   messageInput: string = '';
-  messageType: 'c'|'t' = 'c';
+  messageType: 'c' | 't' = 'c';
+
+  @ViewChild('chatContainer') chatContainer!: ElementRef;
 
   constructor(
     private db: AngularFireDatabase
-  ){
+  ) {
 
   }
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class ChatComponent implements OnInit{
   }
   sendMessage() {
     if (this.newMessage.trim() !== '') {
-      this.db.list('conversas/conversa_1/mensagens').push({ text: this.newMessage, type: this.messageType == 'c'? 'sent': 'received' });
+      this.db.list('conversas/conversa_1/mensagens').push({ text: this.newMessage, type: this.messageType == 'c' ? 'sent' : 'received' });
       // Aqui, você pode adicionar lógica para processar a mensagem recebida, se necessário.
       this.newMessage = '';
 
@@ -37,15 +39,23 @@ export class ChatComponent implements OnInit{
     }
   }
 
+  protected scrollChatToBottom() {
+    if (this.chatContainer) {
+      const container = this.chatContainer.nativeElement;
+      container.scrollTop = container.scrollHeight - container.offsetHeight;
+    }
+  }
+
   private obterMensagensEmTempoReal(conversaId: string) {
     return this.db.list(`conversas/${conversaId}/mensagens`).valueChanges();
   }
 
   private updateMessageInput() {
-    this.obterMensagensEmTempoReal('conversa_1').subscribe((res) =>{
+    this.obterMensagensEmTempoReal('conversa_1').subscribe((res) => {
       console.log("TESTEEEE::::" + JSON.stringify(res));
       this.messages = res as mensagem[];
     })
     this.messageInput = this.messages.map(message => message.text).join('\n');
+    this.scrollChatToBottom();
   }
 }

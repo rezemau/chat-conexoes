@@ -1,18 +1,32 @@
-<div class="chat-container">
-  <div *ngFor="let message of messages" [ngClass]="{'sent': message.type === 'sent', 'received': message.type === 'received'}" class="message">
-    {{ message.text }}
-  </div>
-</div>
-<div class="user-type-container">
-  <label for="client">Cliente</label>
-  <input type="radio" id="client" name="messageType" [(ngModel)]="messageType" value=c />
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-md-8 mx-auto">
+          <div class="chat-container" #chatContainer [scrollTop]="chatContainer.scrollHeight">
+              <div *ngFor="let message of messages" [ngClass]="{'sent': message.type === 'sent', 'received': message.type === 'received'}" class="message">
+                  <div class="message-content">
+                      <p>{{ message.text }}</p>
+                  </div>
+              </div>
+          </div>
 
-  <label for="consultant">Consultor</label>
-  <input type="radio" id="consultant" name="messageType" [(ngModel)]="messageType" value=t />
-</div>
-<div class="input-container">
-  <div class="new-message-container">
-    <input class="new-message" [(ngModel)]="newMessage" placeholder="Digite sua mensagem..." />
-    <button (click)="sendMessage()">Enviar</button>
+          <div class="user-type-container mt-3">
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="client" name="messageType" [(ngModel)]="messageType" value="c">
+                  <label class="form-check-label" for="client">Cliente</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="consultant" name="messageType" [(ngModel)]="messageType" value="t">
+                  <label class="form-check-label" for="consultant">Consultor</label>
+              </div>
+          </div>
+
+          <div class="input-container mt-3">
+              <div class="input-group">
+                  <input class="form-control new-message" [(ngModel)]="newMessage" placeholder="Digite sua mensagem..." (keyup.enter)="sendMessage()">
+                  <button class="btn btn-primary" (click)="sendMessage()">Enviar</button>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
