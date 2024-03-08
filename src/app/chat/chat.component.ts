@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { ActivatedRoute, Params } from '@angular/router';
 
 
 interface mensagem {
@@ -21,12 +22,18 @@ export class ChatComponent implements OnInit {
   @ViewChild('chatContainer') chatContainer!: ElementRef;
 
   constructor(
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private route: ActivatedRoute
   ) {
 
   }
   ngOnInit(): void {
     this.updateMessageInput();
+    this.route.params.subscribe((params: Params) => {
+      // params conterá os parâmetros da URL
+      const id = params['id'];
+      alert(id);
+    });
   }
   sendMessage() {
     if (this.newMessage.trim() !== '') {
